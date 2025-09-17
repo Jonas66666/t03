@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoPower TVs - Energy Efficient Televisions</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* Base styles and CSS reset */
         * {
@@ -262,6 +263,123 @@
             opacity: 0.8;
         }
 
+        /* Visualization Styles */
+        .visualization-controls {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .control-group {
+            margin-bottom: 1rem;
+        }
+        
+        .control-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .slider-value {
+            min-width: 60px;
+            text-align: right;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        input[type="range"] {
+            flex: 1;
+            height: 8px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: #ddd;
+            outline: none;
+            border-radius: 4px;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin-bottom: 2rem;
+        }
+        
+        .savings-calculator {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .savings-result {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--light);
+            border-radius: 10px;
+            margin-top: 1.5rem;
+        }
+        
+        .savings-amount {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 0.5rem 0;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .comparison-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        
+        .tech-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .environment-impact {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        select.tv-select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+            font-size: 1rem;
+        }
+
         /* Responsive design */
         @media (max-width: 768px) {
             .nav-links {
@@ -289,6 +407,14 @@
             .nav-links {
                 margin-top: 1rem;
             }
+
+            .stats {
+                flex-direction: column;
+            }
+
+            .stat-item {
+                min-width: auto;
+            }
         }
     </style>
 </head>
@@ -304,6 +430,7 @@
             <ul class="nav-links">
                 <li><a href="#home" class="nav-link active">Home</a></li>
                 <li><a href="#televisions" class="nav-link">Televisions</a></li>
+                <li><a href="#visualization" class="nav-link">Energy Comparison</a></li>
                 <li><a href="#about" class="nav-link">About Us</a></li>
             </ul>
         </nav>
@@ -379,7 +506,7 @@
                     </div>
                     
                     <div class="tv-card">
-                        <img src="https://unsplash.com/photos/a-flat-screen-tv-sitting-on-top-of-a-white-cabinet-Sd87V72cJEU" alt="EcoVision OLED TV">
+                        <img src="https://www.sammobile.com/wp-content/uploads/2023/01/Samsung-QD-OLED-TV-2023.jpg" alt="EcoVision OLED TV">
                         <div class="tv-card-content">
                             <h3>EcoVision OLED TV</h3>
                             <span class="energy-rating">5 Star Rating</span>
@@ -434,6 +561,124 @@
                     </table>
                 </div>
                 <p><small>*Based on 5 hours daily usage and Australian average electricity rate of $0.30 per kWh</small></p>
+            </div>
+        </section>
+
+        <!-- Visualization Page -->
+        <section id="visualization" class="page">
+            <div class="hero">
+                <h1>Energy Consumption Comparison</h1>
+                <p>Explore how different TV technologies impact your energy bill and the environment</p>
+            </div>
+            
+            <div class="section">
+                <h2>Compare TV Energy Efficiency</h2>
+                <p>Use the interactive tools below to understand how much energy different television technologies consume and how much you could save by choosing an energy-efficient model.</p>
+                
+                <div class="visualization-controls">
+                    <div class="control-group">
+                        <label for="hours-per-day">Daily Usage Hours:</label>
+                        <div class="slider-container">
+                            <input type="range" id="hours-per-day" min="1" max="12" value="5" step="0.5">
+                            <span class="slider-value" id="hours-value">5 hours</span>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="energy-rate">Electricity Rate (per kWh):</label>
+                        <div class="slider-container">
+                            <input type="range" id="energy-rate" min="0.10" max="0.50" value="0.30" step="0.05">
+                            <span class="slider-value" id="rate-value">$0.30</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <canvas id="consumptionChart"></canvas>
+                </div>
+                
+                <div class="savings-calculator">
+                    <h3>Annual Savings Calculator</h3>
+                    <p>See how much you could save by switching to a more energy-efficient television:</p>
+                    
+                    <div class="control-group">
+                        <label for="current-tv">Your Current TV Type:</label>
+                        <select id="current-tv" class="tv-select">
+                            <option value="plasma">Plasma TV (150-300W)</option>
+                            <option value="led_old">Older LED/LCD TV (100-150W)</option>
+                            <option value="led_standard">Standard LED/LCD TV (70-100W)</option>
+                            <option value="qled">QLED TV (70-120W)</option>
+                            <option value="oled">OLED TV (60-110W)</option>
+                            <option value="led_efficient">Efficient LED/LCD TV (50-80W)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="new-tv">New TV Type:</label>
+                        <select id="new-tv" class="tv-select">
+                            <option value="led_efficient">Efficient LED/LCD TV (50-80W)</option>
+                            <option value="oled">OLED TV (60-110W)</option>
+                            <option value="qled">QLED TV (70-120W)</option>
+                            <option value="led_standard">Standard LED/LCD TV (70-100W)</option>
+                            <option value="led_old">Older LED/LCD TV (100-150W)</option>
+                            <option value="plasma">Plasma TV (150-300W)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="savings-result">
+                        <h4>Estimated Annual Savings</h4>
+                        <div class="savings-amount" id="savings-amount">$0</div>
+                        <p>And <span id="co2-reduction">0</span> kg less CO₂ emissions</p>
+                    </div>
+                </div>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-card">
+                        <div class="tech-icon">
+                            <i class="fas fa-tv"></i>
+                        </div>
+                        <h3>LED/LCD TVs</h3>
+                        <p>Most common technology with good efficiency. Newer models have significant improvements in energy consumption.</p>
+                        <div class="energy-rating">4-6 Star Rating</div>
+                    </div>
+                    
+                    <div class="comparison-card">
+                        <div class="tech-icon">
+                            <i class="fas fa-tv"></i>
+                        </div>
+                        <h3>QLED TVs</h3>
+                        <p>Quantum dot technology offers vibrant colors with moderate energy consumption. Efficiency varies by model.</p>
+                        <div class="energy-rating">3.5-5.5 Star Rating</div>
+                    </div>
+                    
+                    <div class="comparison-card">
+                        <div class="tech-icon">
+                            <i class="fas fa-tv"></i>
+                        </div>
+                        <h3>OLED TVs</h3>
+                        <p>Self-emissive pixels provide perfect blacks and better efficiency for dark content. Consumption varies with content.</p>
+                        <div class="energy-rating">4-5.5 Star Rating</div>
+                    </div>
+                </div>
+                
+                <div class="environment-impact">
+                    <h2>Environmental Impact</h2>
+                    <p>Choosing an energy-efficient television doesn't just save you money—it also reduces your carbon footprint. Based on the Australian energy grid:</p>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-number" id="co2-saving">0.8</div>
+                            <div class="stat-desc">kg of CO₂ saved per year per efficient TV</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="equivalent-trees">5</div>
+                            <div class="stat-desc">Tree seedlings grown for 10 years</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="equivalent-miles">12</div>
+                            <div class="stat-desc">Miles not driven</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -513,7 +758,7 @@
             // Check URL hash on page load
             if (window.location.hash) {
                 const targetPage = window.location.hash.substring(1);
-                if (targetPage === 'home' || targetPage === 'televisions' || targetPage === 'about') {
+                if (targetPage === 'home' || targetPage === 'televisions' || targetPage === 'visualization' || targetPage === 'about') {
                     showPage(targetPage);
                     updateActiveNavLink(targetPage);
                 }
@@ -549,7 +794,133 @@
                 // Add active class to the clicked link
                 document.querySelector(`a[href="#${pageId}"]`).classList.add('active');
             }
+
+            // Initialize visualization
+            initChart();
+            
+            // Set up event listeners for sliders and selects
+            document.getElementById('hours-per-day').addEventListener('input', updateCalculations);
+            document.getElementById('energy-rate').addEventListener('input', updateCalculations);
+            document.getElementById('current-tv').addEventListener('change', updateCalculations);
+            document.getElementById('new-tv').addEventListener('change', updateCalculations);
+            
+            // Initial calculation
+            updateCalculations();
         });
+
+        // TV technology data (average power consumption in watts)
+        const tvTechnologies = {
+            plasma: { min: 150, max: 300, avg: 225, label: "Plasma TV", color: "#FF6384" },
+            led_old: { min: 100, max: 150, avg: 125, label: "Older LED/LCD", color: "#36A2EB" },
+            led_standard: { min: 70, max: 100, avg: 85, label: "Standard LED/LCD", color: "#4BC0C0" },
+            qled: { min: 70, max: 120, avg: 95, label: "QLED TV", color: "#FFCD56" },
+            oled: { min: 60, max: 110, avg: 85, label: "OLED TV", color: "#9966FF" },
+            led_efficient: { min: 50, max: 80, avg: 65, label: "Efficient LED/LCD", color: "#32a852" }
+        };
+
+        // Chart initialization
+        let consumptionChart;
+        
+        function initChart() {
+            const ctx = document.getElementById('consumptionChart').getContext('2d');
+            consumptionChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: Object.values(tvTechnologies).map(tech => tech.label),
+                    datasets: [{
+                        label: 'Average Power Consumption (Watts)',
+                        data: Object.values(tvTechnologies).map(tech => tech.avg),
+                        backgroundColor: Object.values(tvTechnologies).map(tech => tech.color),
+                        borderColor: 'rgba(0, 0, 0, 0.1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Power Consumption (Watts)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'TV Power Consumption by Technology'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const tech = Object.values(tvTechnologies)[context.dataIndex];
+                                    return `Range: ${tech.min}-${tech.max}W, Average: ${tech.avg}W`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Update calculations based on user input
+        function updateCalculations() {
+            const hoursPerDay = parseFloat(document.getElementById('hours-per-day').value);
+            const energyRate = parseFloat(document.getElementById('energy-rate').value);
+            
+            // Update sliders value displays
+            document.getElementById('hours-value').textContent = `${hoursPerDay} hours`;
+            document.getElementById('rate-value').textContent = `$${energyRate.toFixed(2)}`;
+            
+            // Calculate and update savings
+            calculateSavings(hoursPerDay, energyRate);
+            
+            // Update environmental impact
+            updateEnvironmentalImpact(hoursPerDay, energyRate);
+        }
+        
+        function calculateSavings(hours, rate) {
+            const currentTvType = document.getElementById('current-tv').value;
+            const newTvType = document.getElementById('new-tv').value;
+            
+            const currentAvg = tvTechnologies[currentTvType].avg;
+            const newAvg = tvTechnologies[newTvType].avg;
+            
+            // Calculate annual energy consumption in kWh
+            const currentKwh = (currentAvg * hours * 365) / 1000;
+            const newKwh = (newAvg * hours * 365) / 1000;
+            
+            // Calculate cost
+            const currentCost = currentKwh * rate;
+            const newCost = newKwh * rate;
+            const savings = currentCost - newCost;
+            
+            // Calculate CO2 savings (approx 0.8 kg CO2 per kWh in Australia)
+            const co2Savings = (currentKwh - newKwh) * 0.8;
+            
+            // Update UI
+            document.getElementById('savings-amount').textContent = `$${savings.toFixed(2)}`;
+            document.getElementById('co2-reduction').textContent = co2Savings.toFixed(1);
+        }
+        
+        function updateEnvironmentalImpact(hours, rate) {
+            // Calculate based on efficient LED TV vs average TV
+            const avgTvConsumption = 100; // Average watts for typical TV
+            const efficientTvConsumption = 65; // Efficient LED TV
+            
+            const avgKwh = (avgTvConsumption * hours * 365) / 1000;
+            const efficientKwh = (efficientTvConsumption * hours * 365) / 1000;
+            
+            const co2Saving = (avgKwh - efficientKwh) * 0.8;
+            const equivalentTrees = (co2Saving / 0.04).toFixed(0); // Rough estimate
+            const equivalentMiles = (co2Saving / 0.404).toFixed(0); // Rough estimate
+            
+            document.getElementById('co2-saving').textContent = co2Saving.toFixed(1);
+            document.getElementById('equivalent-trees').textContent = equivalentTrees;
+            document.getElementById('equivalent-miles').textContent = equivalentMiles;
+        }
     </script>
 </body>
 </html>
