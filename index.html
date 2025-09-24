@@ -430,7 +430,6 @@
             <ul class="nav-links">
                 <li><a href="#home" class="nav-link active">Home</a></li>
                 <li><a href="#televisions" class="nav-link">Televisions</a></li>
-                <li><a href="#visualization" class="nav-link">Energy Comparison</a></li>
                 <li><a href="#about" class="nav-link">About Us</a></li>
             </ul>
         </nav>
@@ -471,7 +470,7 @@
             </div>
         </section>
 
-        <!-- Televisions Page -->
+        <!-- Televisions Page with Data Visualization -->
         <section id="televisions" class="page">
             <div class="hero">
                 <h1>Our Television Range</h1>
@@ -506,7 +505,7 @@
                     </div>
                     
                     <div class="tv-card">
-                        <img src="https://www.sammobile.com/wp-content/uploads/2023/01/Samsung-QD-OLED-TV-2023.jpg" alt="EcoVision OLED TV">
+                        <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="EcoVision OLED TV">
                         <div class="tv-card-content">
                             <h3>EcoVision OLED TV</h3>
                             <span class="energy-rating">5 Star Rating</span>
@@ -518,62 +517,10 @@
                 </div>
             </div>
             
+            <!-- Data Visualization Section -->
             <div class="section">
-                <h2>Energy Consumption Comparison</h2>
-                <p>The following table compares the energy consumption of different television technologies available in the Australian market:</p>
-                
-                <div style="overflow-x: auto;">
-                    <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
-                        <thead>
-                            <tr style="background-color: var(--primary); color: white;">
-                                <th style="padding: 12px; text-align: left;">TV Technology</th>
-                                <th style="padding: 12px; text-align: left;">Average Power Consumption</th>
-                                <th style="padding: 12px; text-align: left;">Annual Energy Cost*</th>
-                                <th style="padding: 12px; text-align: left;">Energy Rating</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr style="border-bottom: 1px solid #ddd;">
-                                <td style="padding: 12px;">LED/LCD</td>
-                                <td style="padding: 12px;">50-100W</td>
-                                <td style="padding: 12px;">$30-$60</td>
-                                <td style="padding: 12px;">4-6 stars</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid #ddd;">
-                                <td style="padding: 12px;">QLED</td>
-                                <td style="padding: 12px;">70-120W</td>
-                                <td style="padding: 12px;">$40-$70</td>
-                                <td style="padding: 12px;">3.5-5.5 stars</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid #ddd;">
-                                <td style="padding: 12px;">OLED</td>
-                                <td style="padding: 12px;">60-110W</td>
-                                <td style="padding: 12px;">$35-$65</td>
-                                <td style="padding: 12px;">4-5.5 stars</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 12px;">Plasma (Older Tech)</td>
-                                <td style="padding: 12px;">150-300W</td>
-                                <td style="padding: 12px;">$90-$180</td>
-                                <td style="padding: 12px;">1-3 stars</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <p><small>*Based on 5 hours daily usage and Australian average electricity rate of $0.30 per kWh</small></p>
-            </div>
-        </section>
-
-        <!-- Visualization Page -->
-        <section id="visualization" class="page">
-            <div class="hero">
-                <h1>Energy Consumption Comparison</h1>
-                <p>Explore how different TV technologies impact your energy bill and the environment</p>
-            </div>
-            
-            <div class="section">
-                <h2>Compare TV Energy Efficiency</h2>
-                <p>Use the interactive tools below to understand how much energy different television technologies consume and how much you could save by choosing an energy-efficient model.</p>
+                <h2>Interactive Energy Comparison</h2>
+                <p>Explore how different TV technologies impact your energy bill and the environment with our interactive tools.</p>
                 
                 <div class="visualization-controls">
                     <div class="control-group">
@@ -631,52 +578,97 @@
                         <p>And <span id="co2-reduction">0</span> kg less CO₂ emissions</p>
                     </div>
                 </div>
+            </div>
+            
+            <div class="section">
+                <h2>Energy Consumption Comparison</h2>
+                <p>The following table compares the energy consumption of different television technologies available in the Australian market:</p>
                 
-                <div class="comparison-grid">
-                    <div class="comparison-card">
-                        <div class="tech-icon">
-                            <i class="fas fa-tv"></i>
-                        </div>
-                        <h3>LED/LCD TVs</h3>
-                        <p>Most common technology with good efficiency. Newer models have significant improvements in energy consumption.</p>
-                        <div class="energy-rating">4-6 Star Rating</div>
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+                        <thead>
+                            <tr style="background-color: var(--primary); color: white;">
+                                <th style="padding: 12px; text-align: left;">TV Technology</th>
+                                <th style="padding: 12px; text-align: left;">Average Power Consumption</th>
+                                <th style="padding: 12px; text-align: left;">Annual Energy Cost*</th>
+                                <th style="padding: 12px; text-align: left;">Energy Rating</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid #ddd;">
+                                <td style="padding: 12px;">LED/LCD</td>
+                                <td style="padding: 12px;">50-100W</td>
+                                <td style="padding: 12px;">$30-$60</td>
+                                <td style="padding: 12px;">4-6 stars</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #ddd;">
+                                <td style="padding: 12px;">QLED</td>
+                                <td style="padding: 12px;">70-120W</td>
+                                <td style="padding: 12px;">$40-$70</td>
+                                <td style="padding: 12px;">3.5-5.5 stars</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #ddd;">
+                                <td style="padding: 12px;">OLED</td>
+                                <td style="padding: 12px;">60-110W</td>
+                                <td style="padding: 12px;">$35-$65</td>
+                                <td style="padding: 12px;">4-5.5 stars</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px;">Plasma (Older Tech)</td>
+                                <td style="padding: 12px;">150-300W</td>
+                                <td style="padding: 12px;">$90-$180</td>
+                                <td style="padding: 12px;">1-3 stars</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p><small>*Based on 5 hours daily usage and Australian average electricity rate of $0.30 per kWh</small></p>
+            </div>
+            
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-tv"></i>
                     </div>
-                    
-                    <div class="comparison-card">
-                        <div class="tech-icon">
-                            <i class="fas fa-tv"></i>
-                        </div>
-                        <h3>QLED TVs</h3>
-                        <p>Quantum dot technology offers vibrant colors with moderate energy consumption. Efficiency varies by model.</p>
-                        <div class="energy-rating">3.5-5.5 Star Rating</div>
-                    </div>
-                    
-                    <div class="comparison-card">
-                        <div class="tech-icon">
-                            <i class="fas fa-tv"></i>
-                        </div>
-                        <h3>OLED TVs</h3>
-                        <p>Self-emissive pixels provide perfect blacks and better efficiency for dark content. Consumption varies with content.</p>
-                        <div class="energy-rating">4-5.5 Star Rating</div>
-                    </div>
+                    <h3>LED/LCD TVs</h3>
+                    <p>Most common technology with good efficiency. Newer models have significant improvements in energy consumption.</p>
+                    <div class="energy-rating">4-6 Star Rating</div>
                 </div>
                 
-                <div class="environment-impact">
-                    <h2>Environmental Impact</h2>
-                    <p>Choosing an energy-efficient television doesn't just save you money—it also reduces your carbon footprint. Based on the Australian energy grid:</p>
-                    <div class="stats">
-                        <div class="stat-item">
-                            <div class="stat-number" id="co2-saving">0.8</div>
-                            <div class="stat-desc">kg of CO₂ saved per year per efficient TV</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" id="equivalent-trees">5</div>
-                            <div class="stat-desc">Tree seedlings grown for 10 years</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" id="equivalent-miles">12</div>
-                            <div class="stat-desc">Miles not driven</div>
-                        </div>
+                <div class="comparison-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-tv"></i>
+                    </div>
+                    <h3>QLED TVs</h3>
+                    <p>Quantum dot technology offers vibrant colors with moderate energy consumption. Efficiency varies by model.</p>
+                    <div class="energy-rating">3.5-5.5 Star Rating</div>
+                </div>
+                
+                <div class="comparison-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-tv"></i>
+                    </div>
+                    <h3>OLED TVs</h3>
+                    <p>Self-emissive pixels provide perfect blacks and better efficiency for dark content. Consumption varies with content.</p>
+                    <div class="energy-rating">4-5.5 Star Rating</div>
+                </div>
+            </div>
+            
+            <div class="environment-impact">
+                <h2>Environmental Impact</h2>
+                <p>Choosing an energy-efficient television doesn't just save you money—it also reduces your carbon footprint. Based on the Australian energy grid:</p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="co2-saving">0.8</div>
+                        <div class="stat-desc">kg of CO₂ saved per year per efficient TV</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="equivalent-trees">5</div>
+                        <div class="stat-desc">Tree seedlings grown for 10 years</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="equivalent-miles">12</div>
+                        <div class="stat-desc">Miles not driven</div>
                     </div>
                 </div>
             </div>
@@ -758,7 +750,7 @@
             // Check URL hash on page load
             if (window.location.hash) {
                 const targetPage = window.location.hash.substring(1);
-                if (targetPage === 'home' || targetPage === 'televisions' || targetPage === 'visualization' || targetPage === 'about') {
+                if (targetPage === 'home' || targetPage === 'televisions' || targetPage === 'about') {
                     showPage(targetPage);
                     updateActiveNavLink(targetPage);
                 }
