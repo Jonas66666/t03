@@ -959,7 +959,7 @@
         </div>
     </footer>
 
-   <script>
+       <script>
         // Set current year in footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
@@ -982,81 +982,82 @@
                     const targetPage = this.getAttribute('href').substring(1);
                     showPage(targetPage);
                     updateActiveNavLink(targetPage);
-                    
-                    // Update URL hash
-                    window.location.hash = targetPage;
                 });
             });
             
-            // Check URL hash on page load
-            if (window.location.hash) {
-                const targetPage = window.location.hash.substring(1);
-                if (targetPage === 'home' || targetPage === 'televisions' || targetPage === 'about') {
-                    showPage(targetPage);
-                    updateActiveNavLink(targetPage);
-                }
-            }
-            
-            // Mouseover feedback for nav links
-            navLinks.forEach(link => {
-                link.addEventListener('mouseover', function() {
-                    this.style.transform = 'translateY(-2px)';
-                });
-                
-                link.addEventListener('mouseout', function() {
-                    this.style.transform = 'translateY(0)';
-                });
-            });
-            
+            // Function to show specific page and hide others
             function showPage(pageId) {
-                // Hide all pages
                 pages.forEach(page => {
                     page.classList.remove('active');
                 });
-                
-                // Show the selected page
                 document.getElementById(pageId).classList.add('active');
             }
             
-            function updateActiveNavLink(pageId) {
-                // Remove active class from all links
+            // Function to update active navigation link
+            function updateActiveNavLink(activePage) {
                 navLinks.forEach(link => {
                     link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${activePage}`) {
+                        link.classList.add('active');
+                    }
                 });
-                
-                // Add active class to the clicked link
-                document.querySelector(`a[href="#${pageId}"]`).classList.add('active');
             }
+            
+            // Initialize data visualization
+            initializeVisualization();
+            
+            // Initialize savings calculator
+            initializeSavingsCalculator();
+            
+            // Initialize FAQ functionality
+            initializeFAQ();
         });
 
-       // Initial calculation
-            updateCalculations();
-        });
-
-        // TV technology data (average power consumption in watts)
-        const tvTechnologies = {
-            plasma: { min: 150, max: 300, avg: 225, label: "Plasma TV", color: "#FF6384" },
-            led_old: { min: 100, max: 150, avg: 125, label: "Older LED/LCD", color: "#36A2EB" },
-            led_standard: { min: 70, max: 100, avg: 85, label: "Standard LED/LCD", color: "#4BC0C0" },
-            qled: { min: 70, max: 120, avg: 95, label: "QLED TV", color: "#FFCD56" },
-            oled: { min: 60, max: 110, avg: 85, label: "OLED TV", color: "#9966FF" },
-            led_efficient: { min: 50, max: 80, avg: 65, label: "Efficient LED/LCD", color: "#32a852" }
-        };
-
-        // Chart initialization
-        let consumptionChart;
-        
-        function initChart() {
+        // Data Visualization
+        function initializeVisualization() {
+            const hoursSlider = document.getElementById('hours-per-day');
+            const hoursValue = document.getElementById('hours-value');
+            const rateSlider = document.getElementById('energy-rate');
+            const rateValue = document.getElementById('rate-value');
+            
+            // TV consumption data (watts)
+            const tvConsumption = {
+                'ecosmart_led': 45,
+                'powersave_qled': 65,
+                'ecovision_oled': 55
+            };
+            
+            // Update slider values display
+            hoursSlider.addEventListener('input', function() {
+                hoursValue.textContent = `${this.value} hours`;
+                updateChart();
+            });
+            
+            rateSlider.addEventListener('input', function() {
+                rateValue.textContent = `$${parseFloat(this.value).toFixed(2)}`;
+                updateChart();
+                updateSavingsCalculator();
+            });
+            
+            // Initialize chart
             const ctx = document.getElementById('consumptionChart').getContext('2d');
-            consumptionChart = new Chart(ctx, {
+            const consumptionChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: Object.values(tvTechnologies).map(tech => tech.label),
+                    labels: ['EcoSmart LED', 'PowerSave QLED', 'EcoVision OLED'],
                     datasets: [{
-                        label: 'Average Power Consumption (Watts)',
-                        data: Object.values(tvTechnologies).map(tech => tech.avg),
-                        backgroundColor: Object.values(tvTechnologies).map(tech => tech.color),
-                        borderColor: 'rgba(0, 0, 0, 0.1)',
+                        label: 'Daily Energy Consumption (kWh)',
+                        data: [0, 0, 0],
+                        backgroundColor: [
+                            'rgba(58, 124, 165, 0.7)',
+                            'rgba(47, 102, 144, 0.7)',
+                            'rgba(217, 83, 79, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(58, 124, 165, 1)',
+                            'rgba(47, 102, 144, 1)',
+                            'rgba(217, 83, 79, 1)'
+                        ],
                         borderWidth: 1
                     }]
                 },
@@ -1068,82 +1069,202 @@
                             beginAtZero: true,
                             title: {
                                 display: true,
-                                text: 'Power Consumption (Watts)'
+                                text: 'kWh per Day'
                             }
                         }
                     },
                     plugins: {
                         title: {
                             display: true,
-                            text: 'TV Power Consumption by Technology'
+                            text: 'Daily Energy Consumption by TV Model'
                         },
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
-                                    const tech = Object.values(tvTechnologies)[context.dataIndex];
-                                    return `Range: ${tech.min}-${tech.max}W, Average: ${tech.avg}W`;
+                                    const hours = parseFloat(hoursSlider.value);
+                                    const rate = parseFloat(rateSlider.value);
+                                    const consumption = context.raw;
+                                    const cost = (consumption * rate).toFixed(2);
+                                    return `${consumption.toFixed(2)} kWh ($${cost} per day)`;
                                 }
                             }
                         }
                     }
                 }
             });
+            
+            // Update chart function
+            function updateChart() {
+                const hours = parseFloat(hoursSlider.value);
+                const consumptionData = Object.values(tvConsumption).map(watts => {
+                    // Convert watts to kWh (watts * hours / 1000)
+                    return (watts * hours) / 1000;
+                });
+                
+                consumptionChart.data.datasets[0].data = consumptionData;
+                consumptionChart.update();
+                
+                // Update environmental impact stats
+                updateEnvironmentalImpact();
+            }
+            
+            // Initial chart update
+            updateChart();
         }
-        
-        // Update calculations based on user input
-        function updateCalculations() {
-            const hoursPerDay = parseFloat(document.getElementById('hours-per-day').value);
-            const energyRate = parseFloat(document.getElementById('energy-rate').value);
+
+        // Savings Calculator
+        function initializeSavingsCalculator() {
+            const currentTvSelect = document.getElementById('current-tv');
+            const newTvSelect = document.getElementById('new-tv');
             
-            // Update sliders value displays
-            document.getElementById('hours-value').textContent = `${hoursPerDay} hours`;
-            document.getElementById('rate-value').textContent = `$${energyRate.toFixed(2)}`;
+            // TV power consumption ranges (watts)
+            const tvPowerRanges = {
+                'plasma': { min: 150, max: 300, avg: 225 },
+                'led_old': { min: 100, max: 150, avg: 125 },
+                'led_standard': { min: 70, max: 100, avg: 85 },
+                'qled': { min: 70, max: 120, avg: 95 },
+                'oled': { min: 60, max: 110, avg: 85 },
+                'led_efficient': { min: 50, max: 80, avg: 65 }
+            };
             
-            // Calculate and update savings
-            calculateSavings(hoursPerDay, energyRate);
+            currentTvSelect.addEventListener('change', updateSavingsCalculator);
+            newTvSelect.addEventListener('change', updateSavingsCalculator);
             
-            // Update environmental impact
-            updateEnvironmentalImpact(hoursPerDay, energyRate);
+            // Initial calculation
+            updateSavingsCalculator();
         }
-        
-        function calculateSavings(hours, rate) {
-            const currentTvType = document.getElementById('current-tv').value;
-            const newTvType = document.getElementById('new-tv').value;
+
+        function updateSavingsCalculator() {
+            const rateSlider = document.getElementById('energy-rate');
+            const hoursSlider = document.getElementById('hours-per-day');
+            const currentTvSelect = document.getElementById('current-tv');
+            const newTvSelect = document.getElementById('new-tv');
+            const savingsAmount = document.getElementById('savings-amount');
+            const co2Reduction = document.getElementById('co2-reduction');
             
-            const currentAvg = tvTechnologies[currentTvType].avg;
-            const newAvg = tvTechnologies[newTvType].avg;
+            const tvPowerRanges = {
+                'plasma': { min: 150, max: 300, avg: 225 },
+                'led_old': { min: 100, max: 150, avg: 125 },
+                'led_standard': { min: 70, max: 100, avg: 85 },
+                'qled': { min: 70, max: 120, avg: 95 },
+                'oled': { min: 60, max: 110, avg: 85 },
+                'led_efficient': { min: 50, max: 80, avg: 65 }
+            };
+            
+            const hours = parseFloat(hoursSlider.value);
+            const rate = parseFloat(rateSlider.value);
+            const daysPerYear = 365;
+            
+            const currentTvType = currentTvSelect.value;
+            const newTvType = newTvSelect.value;
+            
+            const currentPower = tvPowerRanges[currentTvType].avg;
+            const newPower = tvPowerRanges[newTvType].avg;
             
             // Calculate annual energy consumption in kWh
-            const currentKwh = (currentAvg * hours * 365) / 1000;
-            const newKwh = (newAvg * hours * 365) / 1000;
+            const currentAnnualKwh = (currentPower * hours * daysPerYear) / 1000;
+            const newAnnualKwh = (newPower * hours * daysPerYear) / 1000;
             
-            // Calculate cost
-            const currentCost = currentKwh * rate;
-            const newCost = newKwh * rate;
-            const savings = currentCost - newCost;
+            // Calculate annual cost
+            const currentAnnualCost = currentAnnualKwh * rate;
+            const newAnnualCost = newAnnualKwh * rate;
             
-            // Calculate CO2 savings (approx 0.8 kg CO2 per kWh in Australia)
-            const co2Savings = (currentKwh - newKwh) * 0.8;
+            // Calculate savings
+            const annualSavings = currentAnnualCost - newAnnualCost;
             
-            // Update UI
-            document.getElementById('savings-amount').textContent = `$${savings.toFixed(2)}`;
-            document.getElementById('co2-reduction').textContent = co2Savings.toFixed(1);
+            // Calculate CO2 reduction (approx 0.8 kg CO2 per kWh in Australia)
+            const co2Saved = (currentAnnualKwh - newAnnualKwh) * 0.8;
+            
+            // Update display
+            savingsAmount.textContent = `$${annualSavings.toFixed(2)}`;
+            co2Reduction.textContent = co2Saved.toFixed(1);
         }
-        
-        function updateEnvironmentalImpact(hours, rate) {
-            // Calculate based on efficient LED TV vs average TV
-            const avgTvConsumption = 100; // Average watts for typical TV
-            const efficientTvConsumption = 65; // Efficient LED TV
+
+        // Environmental Impact Updates
+        function updateEnvironmentalImpact() {
+            const hoursSlider = document.getElementById('hours-per-day');
+            const rateSlider = document.getElementById('energy-rate');
             
-            const avgKwh = (avgTvConsumption * hours * 365) / 1000;
-            const efficientKwh = (efficientTvConsumption * hours * 365) / 1000;
+            const hours = parseFloat(hoursSlider.value);
+            const daysPerYear = 365;
             
-            const co2Saving = (avgKwh - efficientKwh) * 0.8;
-            const equivalentTrees = (co2Saving / 0.04).toFixed(0); // Rough estimate
-            const equivalentMiles = (co2Saving / 0.404).toFixed(0); // Rough estimate
+            // Base calculation for an efficient TV vs standard TV
+            const efficientPower = 65; // watts
+            const standardPower = 100; // watts
             
-            document.getElementById('co2-saving').textContent = co2Saving.toFixed(1);
-            document.getElementById('equivalent-trees').textContent = equivalentTrees;
-            document.getElementById('equivalent-miles').textContent = equivalentMiles;
+            const efficientAnnualKwh = (efficientPower * hours * daysPerYear) / 1000;
+            const standardAnnualKwh = (standardPower * hours * daysPerYear) / 1000;
+            
+            const kwhSaved = standardAnnualKwh - efficientAnnualKwh;
+            
+            // Update environmental impact stats
+            document.getElementById('co2-saving').textContent = (kwhSaved * 0.8).toFixed(1);
+            document.getElementById('equivalent-trees').textContent = Math.round(kwhSaved * 0.02);
+            document.getElementById('equivalent-miles').textContent = Math.round(kwhSaved * 0.6);
         }
+
+        // FAQ functionality
+        function initializeFAQ() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', function() {
+                    // Toggle active class on clicked item
+                    item.classList.toggle('active');
+                    
+                    // Close other FAQ items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                });
+            });
+        }
+
+        // Add some sample FAQ items to the HTML if they don't exist
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add FAQ section to About page if not present
+            const aboutPage = document.getElementById('about');
+            if (aboutPage && !aboutPage.querySelector('.faq-item')) {
+                const faqSection = document.createElement('div');
+                faqSection.className = 'section';
+                faqSection.innerHTML = `
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How much can I really save with an energy-efficient TV?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Most households save between $30-$100 annually per TV, depending on usage patterns and local electricity rates. The savings can be even greater if you're replacing an older plasma TV.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Do energy-efficient TVs have poorer picture quality?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Not at all! Modern energy-efficient TVs often have better picture quality thanks to advanced technologies like local dimming, quantum dots, and OLED pixels that are inherently more efficient.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How long do energy-efficient TVs last?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Energy-efficient TVs typically have the same lifespan as standard models (7-10 years). In some cases, they may last longer due to reduced heat generation and more efficient components.</p>
+                        </div>
+                    </div>
+                `;
+                aboutPage.appendChild(faqSection);
+                
+                // Re-initialize FAQ functionality
+                initializeFAQ();
+            }
+        });
     </script>
