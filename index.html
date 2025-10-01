@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoPower TVs - Energy Efficient Televisions</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* Base styles and CSS reset */
         * {
@@ -263,261 +262,108 @@
             opacity: 0.8;
         }
 
-        /* Visualization Styles */
-        .visualization-controls {
-            background: var(--light);
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin-bottom: 1.5rem;
-        }
-        
-        .control-group {
-            margin-bottom: 1rem;
-        }
-        
-        .control-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-        
-        .slider-container {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .slider-value {
-            min-width: 60px;
-            text-align: right;
-            font-weight: bold;
-            color: var(--primary);
-        }
-        
-        input[type="range"] {
-            flex: 1;
-            height: 8px;
-            -webkit-appearance: none;
-            appearance: none;
-            background: #ddd;
-            outline: none;
-            border-radius: 4px;
-        }
-        
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--primary);
-            cursor: pointer;
-        }
-        
-        .chart-container {
-            position: relative;
-            height: 400px;
+        /* Question Cards */
+        .questions-intro {
+            text-align: center;
             margin-bottom: 2rem;
-        }
-        
-        .savings-calculator {
-            background: white;
-            border-radius: 10px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        }
-        
-        .savings-result {
-            text-align: center;
             padding: 1.5rem;
             background: var(--light);
             border-radius: 10px;
-            margin-top: 1.5rem;
         }
-        
-        .savings-amount {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: var(--primary);
-            margin: 0.5rem 0;
-        }
-        
-        .comparison-grid {
+
+        .question-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 1.5rem;
             margin-top: 2rem;
         }
-        
-        .comparison-card {
-            background: white;
-            border-radius: 10px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            text-align: center;
-        }
-        
-        .tech-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-        
-        .environment-impact {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 2rem;
-            border-radius: 10px;
-            margin-top: 2rem;
-        }
 
-        select.tv-select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+        .question-card {
             background: white;
-            font-size: 1rem;
-        }
-
-        /* Additional sections styles */
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 2rem auto;
-        }
-        
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: var(--primary);
-            transform: translateX(-50%);
-        }
-        
-        .timeline-item {
-            position: relative;
-            margin: 2rem 0;
-            width: 45%;
-        }
-        
-        .timeline-item:nth-child(odd) {
-            left: 0;
-        }
-        
-        .timeline-item:nth-child(even) {
-            left: 55%;
-        }
-        
-        .timeline-content {
-            background: white;
-            padding: 1.5rem;
             border-radius: 10px;
+            padding: 1.5rem;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        }
-        
-        .timeline-year {
-            font-weight: bold;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-        
-        .tips-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-        
-        .tip-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            text-align: center;
-        }
-        
-        .tip-icon {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        
-        .energy-label-guide {
-            background: linear-gradient(135deg, #ff6b6b, #ffa726, #ffee58, #4caf50, #2196f3, #9c27b0);
-            padding: 2rem;
-            border-radius: 10px;
-            color: white;
-            text-align: center;
-            margin: 2rem 0;
-        }
-        
-        .star-rating {
-            display: flex;
-            justify-content: center;
-            margin: 1rem 0;
-        }
-        
-        .star {
-            font-size: 1.5rem;
-            margin: 0 2px;
-        }
-        
-        .faq-item {
-            background: white;
-            margin: 1rem 0;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .faq-question {
-            padding: 1.5rem;
-            background: var(--light);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .faq-answer {
-            padding: 0 1.5rem;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-        }
-        
-        .faq-item.active .faq-answer {
-            padding: 1.5rem;
-            max-height: 500px;
-        }
-        
-        .call-to-action {
-            text-align: center;
-            padding: 3rem 2rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border-radius: 10px;
-            margin: 2rem 0;
-        }
-        
-        .btn {
-            display: inline-block;
-            background: #ffcc00;
-            color: var(--dark);
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 1rem;
             transition: transform 0.3s ease;
         }
-        
-        .btn:hover {
-            transform: translateY(-3px);
+
+        .question-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .question-card.important {
+            border-left: 5px solid var(--accent);
+        }
+
+        .question-card.less-important {
+            border-left: 5px solid var(--primary);
+        }
+
+        .question-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .question-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-right: 1rem;
+        }
+
+        .question-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--dark);
+        }
+
+        .question-answer {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .question-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .stat-box {
+            text-align: center;
+            flex: 1;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text);
+        }
+
+        .chart-placeholder {
+            height: 200px;
+            background: var(--light);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .conclusion-box {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            text-align: center;
         }
 
         /* Responsive design */
@@ -556,16 +402,7 @@
                 min-width: auto;
             }
             
-            .timeline::before {
-                left: 30px;
-            }
-            
-            .timeline-item {
-                width: calc(100% - 60px);
-                left: 60px !important;
-            }
-            
-            .tips-grid {
+            .question-cards {
                 grid-template-columns: 1fr;
             }
         }
@@ -623,15 +460,157 @@
             </div>
         </section>
 
-        <!-- Televisions Page with Data Visualization -->
+        <!-- Televisions Page with Six Questions -->
         <section id="televisions" class="page">
             <div class="hero">
-                <h1>Our Television Range</h1>
-                <p>Browse our selection of energy-efficient televisions with detailed energy consumption data.</p>
+                <h1>TV Buying Insights</h1>
+                <p>Answers to key questions from Australian Government data on TV energy use</p>
+            </div>
+            
+            <div class="questions-intro">
+                <h2>Making Smarter TV Choices</h2>
+                <p>Based on analysis of Australian TV energy data, here are answers to the most important questions for TV buyers</p>
             </div>
             
             <div class="section">
-                <h2>Energy Efficient Models</h2>
+                <h2>Key Questions for TV Buyers</h2>
+                
+                <div class="question-cards">
+                    <!-- Question 1 -->
+                    <div class="question-card important">
+                        <div class="question-header">
+                            <div class="question-icon">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <div class="question-title">What TV screen technologies are available?</div>
+                        </div>
+                        <div class="question-answer">
+                            <p>Most TVs in Australia are LCD LED, while OLED is less common.</p>
+                            <div class="chart-placeholder">
+                                Pie Chart: LCD LED (83.1%), LCD (10.4%), OLED (6.4%)
+                            </div>
+                            <p>LCD (LED) has the highest usage in TV screen technologies in Australia at 83.14%, followed by LCD with 10.38% and OLED with 6.43%.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 2 -->
+                    <div class="question-card important">
+                        <div class="question-header">
+                            <div class="question-icon">
+                                <i class="fas fa-ruler-combined"></i>
+                            </div>
+                            <div class="question-title">What screen sizes are most common?</div>
+                        </div>
+                        <div class="question-answer">
+                            <p>55-inch is the most common size, followed by mid-range sizes around 42–50 inches.</p>
+                            <div class="chart-placeholder">
+                                Bar Chart: 55" (530 models), 42-50" range
+                            </div>
+                            <p>There are around 300 screen sizes available globally, and the most frequent screen size is approximately 55 inches with 530 TV models.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 3 -->
+                    <div class="question-card important">
+                        <div class="question-header">
+                            <div class="question-icon">
+                                <i class="fas fa-tags"></i>
+                            </div>
+                            <div class="question-title">Which brands dominate the market?</div>
+                        </div>
+                        <div class="question-answer">
+                            <p>Samsung, Sony, and Hisense dominate the market with the largest number of models.</p>
+                            <div class="chart-placeholder">
+                                Brand Comparison: Samsung (859), Sony, Hisense
+                            </div>
+                            <p>Samsung Electronics has the greatest number of different models with approximately 859 globally.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 4 -->
+                    <div class="question-card important">
+                        <div class="question-header">
+                            <div class="question-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div class="question-title">Which screen types use the least power?</div>
+                        </div>
+                        <div class="question-answer">
+                            <p>LCD TVs consume the least power, while OLED uses slightly more.</p>
+                            <div class="chart-placeholder">
+                                Power Consumption: LCD (53 kWh/yr), OLED (higher)
+                            </div>
+                            <div class="question-stats">
+                                <div class="stat-box">
+                                    <div class="stat-value">53 kWh/yr</div>
+                                    <div class="stat-label">LCD Power Use</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-value">Most Efficient</div>
+                                    <div class="stat-label">LCD Technology</div>
+                                </div>
+                            </div>
+                            <p>LCD consumed the least amount of power at approximately 53 kWh/year (minimum usage).</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 5 -->
+                    <div class="question-card less-important">
+                        <div class="question-header">
+                            <div class="question-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="question-title">How does screen size affect power use?</div>
+                        </div>
+                        <div class="question-answer">
+                            <p>Larger TVs use more power - the larger the screen size, the more power consumed.</p>
+                            <div class="chart-placeholder">
+                                Scatter Plot: Screen Size vs Power Consumption
+                            </div>
+                            <p>There's a clear relationship: as screen size increases, power consumption also increases.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 6 -->
+                    <div class="question-card less-important">
+                        <div class="question-header">
+                            <div class="question-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="question-title">Do larger TVs mean worse star ratings?</div>
+                        </div>
+                        <div class="question-answer">
+                            <p>Star ratings are fairly distributed; bigger TVs can still be efficient.</p>
+                            <div class="chart-placeholder">
+                                Star Rating Distribution by Screen Size
+                            </div>
+                            <p>The larger screen sizes generally have higher star ratings. However, ratings tend to be higher on medium sizes compared to small and large based on user preferences.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="conclusion-box">
+                    <h3>Conclusion</h3>
+                    <p>When choosing a TV, balance size, brand, and efficiency. A 55-inch LED TV is common and energy-smart.</p>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-number">55"</div>
+                            <div class="stat-desc">Most Common Size</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">LED</div>
+                            <div class="stat-desc">Most Efficient Tech</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">Samsung</div>
+                            <div class="stat-desc">Most Models Available</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>Our Energy Efficient Models</h2>
                 <p>All our televisions meet strict energy efficiency guidelines and are designed to minimize power consumption while delivering exceptional picture quality.</p>
                 
                 <div class="televisions">
@@ -668,250 +647,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Data Visualization Section -->
-            <div class="section">
-                <h2>Interactive Energy Comparison</h2>
-                <p>Explore how different TV technologies impact your energy bill and the environment with our interactive tools.</p>
-                
-                <div class="visualization-controls">
-                    <div class="control-group">
-                        <label for="hours-per-day">Daily Usage Hours:</label>
-                        <div class="slider-container">
-                            <input type="range" id="hours-per-day" min="1" max="12" value="5" step="0.5">
-                            <span class="slider-value" id="hours-value">5 hours</span>
-                        </div>
-                    </div>
-                    
-                    <div class="control-group">
-                        <label for="energy-rate">Electricity Rate (per kWh):</label>
-                        <div class="slider-container">
-                            <input type="range" id="energy-rate" min="0.10" max="0.50" value="0.30" step="0.05">
-                            <span class="slider-value" id="rate-value">$0.30</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="chart-container">
-                    <canvas id="consumptionChart"></canvas>
-                </div>
-                
-                <div class="savings-calculator">
-                    <h3>Annual Savings Calculator</h3>
-                    <p>See how much you could save by switching to a more energy-efficient television:</p>
-                    
-                    <div class="control-group">
-                        <label for="current-tv">Your Current TV Type:</label>
-                        <select id="current-tv" class="tv-select">
-                            <option value="plasma">Plasma TV (150-300W)</option>
-                            <option value="led_old">Older LED/LCD TV (100-150W)</option>
-                            <option value="led_standard">Standard LED/LCD TV (70-100W)</option>
-                            <option value="qled">QLED TV (70-120W)</option>
-                            <option value="oled">OLED TV (60-110W)</option>
-                            <option value="led_efficient">Efficient LED/LCD TV (50-80W)</option>
-                        </select>
-                    </div>
-                    
-                    <div class="control-group">
-                        <label for="new-tv">New TV Type:</label>
-                        <select id="new-tv" class="tv-select">
-                            <option value="led_efficient">Efficient LED/LCD TV (50-80W)</option>
-                            <option value="oled">OLED TV (60-110W)</option>
-                            <option value="qled">QLED TV (70-120W)</option>
-                            <option value="led_standard">Standard LED/LCD TV (70-100W)</option>
-                            <option value="led_old">Older LED/LCD TV (100-150W)</option>
-                            <option value="plasma">Plasma TV (150-300W)</option>
-                        </select>
-                    </div>
-                    
-                    <div class="savings-result">
-                        <h4>Estimated Annual Savings</h4>
-                        <div class="savings-amount" id="savings-amount">$0</div>
-                        <p>And <span id="co2-reduction">0</span> kg less CO₂ emissions</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="section">
-                <h2>Energy Consumption Comparison</h2>
-                <p>The following table compares the energy consumption of different television technologies available in the Australian market:</p>
-                
-                <div style="overflow-x: auto;">
-                    <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
-                        <thead>
-                            <tr style="background-color: var(--primary); color: white;">
-                                <th style="padding: 12px; text-align: left;">TV Technology</th>
-                                <th style="padding: 12px; text-align: left;">Average Power Consumption</th>
-                                <th style="padding: 12px; text-align: left;">Annual Energy Cost*</th>
-                                <th style="padding: 12px; text-align: left;">Energy Rating</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr style="border-bottom: 1px solid #ddd;">
-                                <td style="padding: 12px;">LED/LCD</td>
-                                <td style="padding: 12px;">50-100W</td>
-                                <td style="padding: 12px;">$30-$60</td>
-                                <td style="padding: 12px;">4-6 stars</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid #ddd;">
-                                <td style="padding: 12px;">QLED</td>
-                                <td style="padding: 12px;">70-120W</td>
-                                <td style="padding: 12px;">$40-$70</td>
-                                <td style="padding: 12px;">3.5-5.5 stars</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid #ddd;">
-                                <td style="padding: 12px;">OLED</td>
-                                <td style="padding: 12px;">60-110W</td>
-                                <td style="padding: 12px;">$35-$65</td>
-                                <td style="padding: 12px;">4-5.5 stars</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 12px;">Plasma (Older Tech)</td>
-                                <td style="padding: 12px;">150-300W</td>
-                                <td style="padding: 12px;">$90-$180</td>
-                                <td style="padding: 12px;">1-3 stars</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <p><small>*Based on 5 hours daily usage and Australian average electricity rate of $0.30 per kWh</small></p>
-            </div>
-            
-            <div class="comparison-grid">
-                <div class="comparison-card">
-                    <div class="tech-icon">
-                        <i class="fas fa-tv"></i>
-                    </div>
-                    <h3>LED/LCD TVs</h3>
-                    <p>Most common technology with good efficiency. Newer models have significant improvements in energy consumption.</p>
-                    <div class="energy-rating">4-6 Star Rating</div>
-                </div>
-                
-                <div class="comparison-card">
-                    <div class="tech-icon">
-                        <i class="fas fa-tv"></i>
-                    </div>
-                    <h3>QLED TVs</h3>
-                    <p>Quantum dot technology offers vibrant colors with moderate energy consumption. Efficiency varies by model.</p>
-                    <div class="energy-rating">3.5-5.5 Star Rating</div>
-                </div>
-                
-                <div class="comparison-card">
-                    <div class="tech-icon">
-                        <i class="fas fa-tv"></i>
-                    </div>
-                    <h3>OLED TVs</h3>
-                    <p>Self-emissive pixels provide perfect blacks and better efficiency for dark content. Consumption varies with content.</p>
-                    <div class="energy-rating">4-5.5 Star Rating</div>
-                </div>
-            </div>
-            
-            <div class="environment-impact">
-                <h2>Environmental Impact</h2>
-                <p>Choosing an energy-efficient television doesn't just save you money—it also reduces your carbon footprint. Based on the Australian energy grid:</p>
-                <div class="stats">
-                    <div class="stat-item">
-                        <div class="stat-number" id="co2-saving">0.8</div>
-                        <div class="stat-desc">kg of CO₂ saved per year per efficient TV</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number" id="equivalent-trees">5</div>
-                        <div class="stat-desc">Tree seedlings grown for 10 years</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number" id="equivalent-miles">12</div>
-                        <div class="stat-desc">Miles not driven</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Additional Sections -->
-            <div class="section">
-                <h2>The Evolution of TV Energy Efficiency</h2>
-                <p>Television technology has come a long way in terms of energy efficiency. Here's how we've progressed:</p>
-                
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <div class="timeline-year">2000s</div>
-                            <h3>Plasma & Early LCD Era</h3>
-                            <p>Plasma TVs consumed 300-500W, while early LCDs used 150-250W. Energy efficiency was not a primary concern for manufacturers.</p>
-                            <div class="energy-rating">1-2 Star Rating</div>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <div class="timeline-year">2010s</div>
-                            <h3>LED Revolution</h3>
-                            <p>LED backlighting reduced consumption to 80-150W. Energy Star ratings became standard, driving efficiency improvements.</p>
-                            <div class="energy-rating">3-4 Star Rating</div>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <div class="timeline-year">2020s</div>
-                            <h3>Smart Efficiency</h3>
-                            <p>OLED and QLED technologies with smart sensors and automatic brightness adjustment. Consumption dropped to 50-100W.</p>
-                            <div class="energy-rating">5-6 Star Rating</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section">
-                <h2>Understanding Energy Rating Labels</h2>
-                <p>Australian Energy Rating Labels help you compare efficiency at a glance. Here's what to look for:</p>
-                
-                <div class="energy-label-guide">
-                    <h3>Energy Rating Label</h3>
-                    <div class="star-rating">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                    </div>
-                    <p>More stars = More efficient</p>
-                    <p>Look for the estimated yearly energy consumption (kWh) to compare running costs</p>
-                </div>
-                
-                <div class="tips-grid">
-                    <div class="tip-card">
-                        <div class="tip-icon">
-                            <i class="fas fa-search"></i>
-                        </div>
-                        <h3>Compare Within Size</h3>
-                        <p>Always compare TVs of similar screen sizes, as larger screens naturally consume more power.</p>
-                    </div>
-                    
-                    <div class="tip-card">
-                        <div class="tip-icon">
-                            <i class="fas fa-bolt"></i>
-                        </div>
-                        <h3>Check Standby Power</h3>
-                        <p>Efficient TVs use less than 0.5W in standby mode. This can save $10-20 annually.</p>
-                    </div>
-                    
-                    <div class="tip-card">
-                        <div class="tip-icon">
-                            <i class="fas fa-sun"></i>
-                        </div>
-                        <h3>Auto-Brightness Feature</h3>
-                        <p>TVs with ambient light sensors can reduce brightness in dark rooms, saving 20-30% energy.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="call-to-action">
-                <h2>Ready to Make the Switch?</h2>
-                <p>Join thousands of Australian households who are saving money and reducing their environmental impact with energy-efficient televisions.</p>
-                <p><strong>Start saving today with our expert recommendations:</strong></p>
-                <a href="#about" class="btn">Contact Our Energy Experts</a>
-                <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.9;">Average household savings: $100+ annually per TV</p>
             </div>
         </section>
 
@@ -959,7 +694,7 @@
         </div>
     </footer>
 
-       <script>
+    <script>
         // Set current year in footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
@@ -1002,269 +737,7 @@
                     }
                 });
             }
-            
-            // Initialize data visualization
-            initializeVisualization();
-            
-            // Initialize savings calculator
-            initializeSavingsCalculator();
-            
-            // Initialize FAQ functionality
-            initializeFAQ();
-        });
-
-        // Data Visualization
-        function initializeVisualization() {
-            const hoursSlider = document.getElementById('hours-per-day');
-            const hoursValue = document.getElementById('hours-value');
-            const rateSlider = document.getElementById('energy-rate');
-            const rateValue = document.getElementById('rate-value');
-            
-            // TV consumption data (watts)
-            const tvConsumption = {
-                'ecosmart_led': 45,
-                'powersave_qled': 65,
-                'ecovision_oled': 55
-            };
-            
-            // Update slider values display
-            hoursSlider.addEventListener('input', function() {
-                hoursValue.textContent = `${this.value} hours`;
-                updateChart();
-            });
-            
-            rateSlider.addEventListener('input', function() {
-                rateValue.textContent = `$${parseFloat(this.value).toFixed(2)}`;
-                updateChart();
-                updateSavingsCalculator();
-            });
-            
-            // Initialize chart
-            const ctx = document.getElementById('consumptionChart').getContext('2d');
-            const consumptionChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['EcoSmart LED', 'PowerSave QLED', 'EcoVision OLED'],
-                    datasets: [{
-                        label: 'Daily Energy Consumption (kWh)',
-                        data: [0, 0, 0],
-                        backgroundColor: [
-                            'rgba(58, 124, 165, 0.7)',
-                            'rgba(47, 102, 144, 0.7)',
-                            'rgba(217, 83, 79, 0.7)'
-                        ],
-                        borderColor: [
-                            'rgba(58, 124, 165, 1)',
-                            'rgba(47, 102, 144, 1)',
-                            'rgba(217, 83, 79, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'kWh per Day'
-                            }
-                        }
-                    },
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Daily Energy Consumption by TV Model'
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    const hours = parseFloat(hoursSlider.value);
-                                    const rate = parseFloat(rateSlider.value);
-                                    const consumption = context.raw;
-                                    const cost = (consumption * rate).toFixed(2);
-                                    return `${consumption.toFixed(2)} kWh ($${cost} per day)`;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-            
-            // Update chart function
-            function updateChart() {
-                const hours = parseFloat(hoursSlider.value);
-                const consumptionData = Object.values(tvConsumption).map(watts => {
-                    // Convert watts to kWh (watts * hours / 1000)
-                    return (watts * hours) / 1000;
-                });
-                
-                consumptionChart.data.datasets[0].data = consumptionData;
-                consumptionChart.update();
-                
-                // Update environmental impact stats
-                updateEnvironmentalImpact();
-            }
-            
-            // Initial chart update
-            updateChart();
-        }
-
-        // Savings Calculator
-        function initializeSavingsCalculator() {
-            const currentTvSelect = document.getElementById('current-tv');
-            const newTvSelect = document.getElementById('new-tv');
-            
-            // TV power consumption ranges (watts)
-            const tvPowerRanges = {
-                'plasma': { min: 150, max: 300, avg: 225 },
-                'led_old': { min: 100, max: 150, avg: 125 },
-                'led_standard': { min: 70, max: 100, avg: 85 },
-                'qled': { min: 70, max: 120, avg: 95 },
-                'oled': { min: 60, max: 110, avg: 85 },
-                'led_efficient': { min: 50, max: 80, avg: 65 }
-            };
-            
-            currentTvSelect.addEventListener('change', updateSavingsCalculator);
-            newTvSelect.addEventListener('change', updateSavingsCalculator);
-            
-            // Initial calculation
-            updateSavingsCalculator();
-        }
-
-        function updateSavingsCalculator() {
-            const rateSlider = document.getElementById('energy-rate');
-            const hoursSlider = document.getElementById('hours-per-day');
-            const currentTvSelect = document.getElementById('current-tv');
-            const newTvSelect = document.getElementById('new-tv');
-            const savingsAmount = document.getElementById('savings-amount');
-            const co2Reduction = document.getElementById('co2-reduction');
-            
-            const tvPowerRanges = {
-                'plasma': { min: 150, max: 300, avg: 225 },
-                'led_old': { min: 100, max: 150, avg: 125 },
-                'led_standard': { min: 70, max: 100, avg: 85 },
-                'qled': { min: 70, max: 120, avg: 95 },
-                'oled': { min: 60, max: 110, avg: 85 },
-                'led_efficient': { min: 50, max: 80, avg: 65 }
-            };
-            
-            const hours = parseFloat(hoursSlider.value);
-            const rate = parseFloat(rateSlider.value);
-            const daysPerYear = 365;
-            
-            const currentTvType = currentTvSelect.value;
-            const newTvType = newTvSelect.value;
-            
-            const currentPower = tvPowerRanges[currentTvType].avg;
-            const newPower = tvPowerRanges[newTvType].avg;
-            
-            // Calculate annual energy consumption in kWh
-            const currentAnnualKwh = (currentPower * hours * daysPerYear) / 1000;
-            const newAnnualKwh = (newPower * hours * daysPerYear) / 1000;
-            
-            // Calculate annual cost
-            const currentAnnualCost = currentAnnualKwh * rate;
-            const newAnnualCost = newAnnualKwh * rate;
-            
-            // Calculate savings
-            const annualSavings = currentAnnualCost - newAnnualCost;
-            
-            // Calculate CO2 reduction (approx 0.8 kg CO2 per kWh in Australia)
-            const co2Saved = (currentAnnualKwh - newAnnualKwh) * 0.8;
-            
-            // Update display
-            savingsAmount.textContent = `$${annualSavings.toFixed(2)}`;
-            co2Reduction.textContent = co2Saved.toFixed(1);
-        }
-
-        // Environmental Impact Updates
-        function updateEnvironmentalImpact() {
-            const hoursSlider = document.getElementById('hours-per-day');
-            const rateSlider = document.getElementById('energy-rate');
-            
-            const hours = parseFloat(hoursSlider.value);
-            const daysPerYear = 365;
-            
-            // Base calculation for an efficient TV vs standard TV
-            const efficientPower = 65; // watts
-            const standardPower = 100; // watts
-            
-            const efficientAnnualKwh = (efficientPower * hours * daysPerYear) / 1000;
-            const standardAnnualKwh = (standardPower * hours * daysPerYear) / 1000;
-            
-            const kwhSaved = standardAnnualKwh - efficientAnnualKwh;
-            
-            // Update environmental impact stats
-            document.getElementById('co2-saving').textContent = (kwhSaved * 0.8).toFixed(1);
-            document.getElementById('equivalent-trees').textContent = Math.round(kwhSaved * 0.02);
-            document.getElementById('equivalent-miles').textContent = Math.round(kwhSaved * 0.6);
-        }
-
-        // FAQ functionality
-        function initializeFAQ() {
-            const faqItems = document.querySelectorAll('.faq-item');
-            
-            faqItems.forEach(item => {
-                const question = item.querySelector('.faq-question');
-                
-                question.addEventListener('click', function() {
-                    // Toggle active class on clicked item
-                    item.classList.toggle('active');
-                    
-                    // Close other FAQ items
-                    faqItems.forEach(otherItem => {
-                        if (otherItem !== item) {
-                            otherItem.classList.remove('active');
-                        }
-                    });
-                });
-            });
-        }
-
-        // Add some sample FAQ items to the HTML if they don't exist
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add FAQ section to About page if not present
-            const aboutPage = document.getElementById('about');
-            if (aboutPage && !aboutPage.querySelector('.faq-item')) {
-                const faqSection = document.createElement('div');
-                faqSection.className = 'section';
-                faqSection.innerHTML = `
-                    <h2>Frequently Asked Questions</h2>
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>How much can I really save with an energy-efficient TV?</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>Most households save between $30-$100 annually per TV, depending on usage patterns and local electricity rates. The savings can be even greater if you're replacing an older plasma TV.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>Do energy-efficient TVs have poorer picture quality?</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>Not at all! Modern energy-efficient TVs often have better picture quality thanks to advanced technologies like local dimming, quantum dots, and OLED pixels that are inherently more efficient.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <span>How long do energy-efficient TVs last?</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p>Energy-efficient TVs typically have the same lifespan as standard models (7-10 years). In some cases, they may last longer due to reduced heat generation and more efficient components.</p>
-                        </div>
-                    </div>
-                `;
-                aboutPage.appendChild(faqSection);
-                
-                // Re-initialize FAQ functionality
-                initializeFAQ();
-            }
         });
     </script>
+</body>
+</html>
