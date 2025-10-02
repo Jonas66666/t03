@@ -1,86 +1,59 @@
-# EcoPower TVs - Energy Efficiency Data Visualization
+# EcoPower TVs - Energy Efficient Televisions
 
-## Data Story
+A responsive website showcasing energy-efficient televisions for Australian consumers, featuring data-driven insights to help make informed purchasing decisions.
 
-### Audience Analysis
-The primary audience for this visualization consists of:
-- **Australian homeowners and renters** interested in reducing energy costs
-- **Environmentally conscious consumers** looking to minimize their carbon footprint
-- **Budget-conscious families** seeking to lower electricity bills without sacrificing entertainment quality
-- **Technology enthusiasts** who want to understand the energy implications of different TV technologies
+## 🌟 Project Overview
 
-These users are typically:
-- Aged 25-65 with mid-to-upper level income
-- Educated and digitally literate
-- Making deliberate purchasing decisions based on both cost and environmental impact
-- Interested in long-term savings rather than just upfront costs
+EcoPower TVs is an educational website that helps Australian consumers understand the energy efficiency of different television technologies. The site provides data-driven insights based on Australian Government datasets to guide users toward more sustainable and cost-effective TV choices.
 
-### Key Audience Questions
-1. How much can I save annually with an energy-efficient television?
-2. What's the difference in energy consumption between TV technologies?
-3. How do energy ratings translate to real-world cost savings?
-4. Which TV models offer the best balance of features and efficiency?
-5. What is the environmental impact of my television choice?
+## 🎯 Target Audience
 
-### Visualization Guidelines
-Based on audience needs, the visualization will:
-- Focus on cost savings and environmental impact
-- Provide clear comparisons between technologies
-- Use Australian dollars and metrics familiar to local consumers
-- Highlight long-term savings versus upfront costs
-- Make energy star ratings easily understandable
-- Include real-world usage scenarios (hours per day, energy rates)
+- **Primary**: Australian homeowners and renters looking to reduce electricity bills
+- **Characteristics**:
+  - Mid-to-upper income level
+  - Environmentally conscious but practical
+  - Interested in long-term savings over upfront costs
+  - Prefer simple, visual information over technical details
+  - Value both cost savings and environmental impact
 
-## About the Data
+## 🔍 Key Questions Addressed
 
-### Data Source
-The energy consumption data presented in this visualization comes from multiple sources:
-- **Australian Government Energy Rating Program** - Official energy star ratings and testing procedures
-- **Manufacturer Specifications** - Published power consumption data from leading TV brands
-- **Industry Reports** - Data from consumer electronics associations and energy efficiency organizations
-- **Simulated Usage Models** - Calculations based on typical Australian viewing habits
+Based on analysis of Australian TV energy data, the website answers these crucial questions:
 
-### Data Processing
-The data underwent several processing steps:
-1. **Normalization** - All power consumption values converted to watts for comparison
-2. **Cost Calculation** - Energy usage converted to annual cost using the Australian average electricity rate of $0.30 per kWh
-3. **Usage Modeling** - Based on average Australian viewing habits of 5 hours per day
-4. **Technology Categorization** - TVs grouped by display technology (LED, QLED, OLED, Plasma)
-5. **Star Rating Alignment** - Energy ratings standardized to the Australian 6-star system
+### Most Important Questions (Direct Impact on Choice)
+1. **What TV screen technologies are available?**
+   - Market distribution: LCD LED (83.1%), LCD (10.4%), OLED (6.4%)
 
-### Privacy
-This visualization uses only aggregated, non-personal data:
-- No individual consumer data is included
-- All figures represent category averages rather than specific user information
-- Manufacturer data is from publicly available specifications
-- Energy cost calculations use publicly available average electricity rates
+2. **What screen sizes are most common?**
+   - 55-inch is most popular, followed by 42-50 inch range
 
-### Accuracy and Limitations
-**Accuracy Considerations:**
-- Energy consumption varies based on usage patterns, settings, and content
-- Actual savings may differ based on individual electricity rates
-- Manufacturer specifications represent laboratory conditions rather than real-world usage
-- Technology is rapidly evolving, so newer models may have improved efficiency
+3. **Which brands dominate the market?**
+   - Samsung leads with 859 models globally
 
-**Limitations:**
-- Does not account for regional variations in electricity costs
-- Based on average usage patterns that may not reflect individual behavior
-- Display technology categories contain variation between models and brands
-- Does not include the energy cost of manufacturing or disposal
+4. **Which screen types use the least power?**
+   - LCD consumes least power (53 kWh/year minimum)
 
-### Ethics
-This visualization adheres to ethical guidelines by:
-- Clearly stating data sources and methodology
-- Providing appropriate context for all comparisons
-- Avoiding exaggeration of energy savings claims
-- Disclosing limitations of the data and analysis
-- Maintaining transparency about calculations and assumptions
-- Not promoting specific brands or models over others
+### Contextual Questions (Additional Awareness)
+5. **How does screen size affect power use?**
+   - Clear relationship: larger screens = more power consumption
 
-## AI Declaration
+6. **Do larger TVs mean worse star ratings?**
+   - No - star ratings are fairly distributed; bigger TVs can still be efficient
 
-This project was developed with assistance from generative AI tools for:
-- Code structure and organization
-- Content ideas and information architecture
-- Data visualization concepts and approaches
-- Documentation formatting and structure
+## 🚀 Key Features
+
+- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
+- **Interactive Navigation**: Smooth page transitions and active state management
+- **Data Visualization**: Clear presentation of TV energy consumption data
+- **Product Showcase**: Featured energy-efficient TV models with specifications
+- **Q&A Format**: Organized information addressing consumer key questions
+- **Energy Education**: Explanation of Australian energy rating system
+
+## 🛠️ Technologies Used
+
+- **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
+- **Icons**: Font Awesome 6.4.0
+- **Styling**: Custom CSS with CSS Variables
+- **Responsive**: Mobile-first design approach
+
+## 📁 Project Structure

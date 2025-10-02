@@ -345,16 +345,22 @@
             color: var(--text);
         }
 
-        .chart-placeholder {
+        .chart-screenshot {
+            width: 100%;
             height: 200px;
             background: var(--light);
             border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             margin: 1rem 0;
-            color: var(--primary);
-            font-weight: bold;
+            object-fit: cover;
+            border: 1px solid #ddd;
+        }
+
+        .chart-caption {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.5rem;
+            font-style: italic;
         }
 
         .conclusion-box {
@@ -486,10 +492,9 @@
                         </div>
                         <div class="question-answer">
                             <p>Most TVs in Australia are LCD LED, while OLED is less common.</p>
-                            <div class="chart-placeholder">
-                                Pie Chart: LCD LED (83.1%), LCD (10.4%), OLED (6.4%)
-                            </div>
-                            <p>LCD (LED) has the highest usage in TV screen technologies in Australia at 83.14%, followed by LCD with 10.38% and OLED with 6.43%.</p>
+                            <img src="https://i.postimg.cc/QdKfSBZz/Screenshot-2025-10-01-103037.jpg" alt="TV Technologies Pie Chart" class="chart-screenshot">
+                            <div class="chart-caption">Market distribution of TV screen technologies in Australia</div>
+                            <p>LCD (LED) has the highest usage in TV screen technologies in Australia at 84.62%, followed by LCD with 8.54% and OLED with 6.84%.</p>
                         </div>
                     </div>
                     
@@ -503,9 +508,8 @@
                         </div>
                         <div class="question-answer">
                             <p>55-inch is the most common size, followed by mid-range sizes around 42–50 inches.</p>
-                            <div class="chart-placeholder">
-                                Bar Chart: 55" (530 models), 42-50" range
-                            </div>
+                            <img src="https://i.postimg.cc/pdNqS2Ps/Screenshot-2025-10-01-110556.jpg" alt="Screen Sizes Bar Chart" class="chart-screenshot">
+                            <div class="chart-caption">Distribution of TV screen sizes in the Australian market</div>
                             <p>There are around 300 screen sizes available globally, and the most frequent screen size is approximately 55 inches with 530 TV models.</p>
                         </div>
                     </div>
@@ -520,9 +524,8 @@
                         </div>
                         <div class="question-answer">
                             <p>Samsung, Sony, and Hisense dominate the market with the largest number of models.</p>
-                            <div class="chart-placeholder">
-                                Brand Comparison: Samsung (859), Sony, Hisense
-                            </div>
+                            <img src="https://i.postimg.cc/9f3JkWc1/Screenshot-2025-10-01-105630.jpg" alt="Brand Comparison Chart" class="chart-screenshot">
+                            <div class="chart-caption">Market share of top TV brands by number of models</div>
                             <p>Samsung Electronics has the greatest number of different models with approximately 859 globally.</p>
                         </div>
                     </div>
@@ -537,9 +540,8 @@
                         </div>
                         <div class="question-answer">
                             <p>LCD TVs consume the least power, while OLED uses slightly more.</p>
-                            <div class="chart-placeholder">
-                                Power Consumption: LCD (53 kWh/yr), OLED (higher)
-                            </div>
+                            <img src="https://i.postimg.cc/g2Lg4wbT/Screenshot-2025-10-01-110151.jpg" alt="Power Consumption Chart" class="chart-screenshot">
+                            <div class="chart-caption">Average annual power consumption by TV technology</div>
                             <div class="question-stats">
                                 <div class="stat-box">
                                     <div class="stat-value">53 kWh/yr</div>
@@ -564,9 +566,8 @@
                         </div>
                         <div class="question-answer">
                             <p>Larger TVs use more power - the larger the screen size, the more power consumed.</p>
-                            <div class="chart-placeholder">
-                                Scatter Plot: Screen Size vs Power Consumption
-                            </div>
+                            <img src="https://i.postimg.cc/sgGTKBCm/Screenshot-2025-09-17-004346.jpg" alt="Size vs Power Correlation" class="chart-screenshot">
+                            <div class="chart-caption">Relationship between screen size and power consumption</div>
                             <p>There's a clear relationship: as screen size increases, power consumption also increases.</p>
                         </div>
                     </div>
@@ -581,9 +582,8 @@
                         </div>
                         <div class="question-answer">
                             <p>Star ratings are fairly distributed; bigger TVs can still be efficient.</p>
-                            <div class="chart-placeholder">
-                                Star Rating Distribution by Screen Size
-                            </div>
+                            <img src="https://i.postimg.cc/9QwL14HS/Screenshot-2025-09-17-082420.jpg" alt="Star Ratings Distribution" class="chart-screenshot">
+                            <div class="chart-caption">Energy star ratings distribution across different screen sizes</div>
                             <p>The larger screen sizes generally have higher star ratings. However, ratings tend to be higher on medium sizes compared to small and large based on user preferences.</p>
                         </div>
                     </div>
